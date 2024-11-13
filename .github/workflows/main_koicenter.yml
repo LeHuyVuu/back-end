@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use Ubuntu for faster builds
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -23,17 +23,16 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install -DskipTests
-        working-directory: ./Koi-Center-Backend  # Adjusted to specify the working directory
+        run: mvn clean install
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: './Koi-Center-Backend/target/*.jar'  # Ensure correct path to the JAR file
+          path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
-    runs-on: ubuntu-latest  # Use Ubuntu for consistency
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'Production'
@@ -52,4 +51,4 @@ jobs:
           app-name: 'koicenter'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_8a46c585ec064814b7fbdf62ebb0a7c3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_22D450E818954C3FB0FD45185AE3DEA7 }}

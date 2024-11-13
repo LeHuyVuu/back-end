@@ -13,7 +13,6 @@ jpa:
     ddl-auto: update
 
 
-
 openapi:
   service:
     api-docs: Koi-Vetenarian-Service API
@@ -26,3 +25,5 @@ springdoc:
 app:
   payment:
     success-url: http://localhost:3000
+server:
+  port: 80

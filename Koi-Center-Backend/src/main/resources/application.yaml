@@ -13,8 +13,6 @@ jpa:
     ddl-auto: update
 
 
-server:
-  port: 8080
 
 openapi:
   service:
